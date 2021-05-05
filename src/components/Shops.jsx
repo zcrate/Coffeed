@@ -4,10 +4,11 @@ import ShopsList from "./ShopsList";
 import { getAllShops } from "../fakeBackend/fakeShopsService";
 
 const Shops = () => {
-  const [shops, setShops] = useState(getAllShops());
+  const [shops] = useState(getAllShops());
 
   return (
     <Fragment>
+      {/* <SortForm classname="row" /> */}
       <ShopsList shops={shops} />
     </Fragment>
   );

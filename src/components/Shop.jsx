@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import { Badge } from "react-bootstrap";
 import { getOpenStatus, timeDisplay } from "../fakeBackend/fakeShopsService";
 
 const Shop = ({ id, name, descr, hours }) => {
@@ -12,7 +13,7 @@ const Shop = ({ id, name, descr, hours }) => {
         shopsListItem 
         container-fluid 
         clickable 
-        ${openStatus ? "shopOpen" : ""}
+        ${openStatus ? "shopOpen" : "shopClosed"}
       `}
       onClick={() => console.log(name)}
     >
@@ -20,9 +21,10 @@ const Shop = ({ id, name, descr, hours }) => {
         <h4 className="col-lg itemName">{name}</h4>
 
         <p className="col itemStatus">
-          {`Hours: ${timeDisplay(hours.open)} - ${timeDisplay(hours.close)}`}
-          <br />
-          {openStatus ? "Open Now" : "Closed"}
+          {`Hours: ${timeDisplay(hours.open)} - ${timeDisplay(hours.close)}`}{" "}
+          <Badge variant="secondary">
+            {openStatus ? "Open Now" : "Closed"}
+          </Badge>
         </p>
       </div>
 

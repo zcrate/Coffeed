@@ -17,10 +17,18 @@ li {
 }
 
 .shopsListItem {
-  outline: red 2px ridge;
+  outline: lightgrey 2px ridge;
   height: minmax(250px, 1fr);
+}
+
+.addShop:hover {
+  text-decoration: none;
 }
 
 .shopOpen {
   outline: green 2px ridge;
+}
+
+.shopClosed {
+  outline: red 2px ridge;
 }
