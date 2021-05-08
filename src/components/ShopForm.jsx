@@ -1,54 +1,72 @@
 import React, { useState } from "react";
 import _ from "lodash";
-import MenuForm from "./MenuForm";
-import MenuDisplay from "./MenuDisplay";
 
-const ShopForm = ({ addShop }) => {
+import MenuForm from "./MenuForm";
+import MenuList from "./MenuList";
+
+import { saveShop } from "../fakeBackend/fakeShopsService";
+
+const ShopForm = (props) => {
   const [data, setData] = useState({
     name: "",
     hours: {
       open: "",
       close: "",
     },
-    menu: {
-      foods: [],
-      drinks: [],
-    },
     description: "",
+    menu: {},
   });
+  const [menuCategories, setMenuCategories] = useState(["food", "drinks"]);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
-  const handleChange = (path, value) => {
-    const shop = { ...data };
-
-    _.set(shop, path, value);
-
-    setData(shop);
+  const editMenuItem = (item) => {
+    setSelectedMenuItem(item);
   };
 
-  const handleMenuChange = (path, value, category) => {
+  const handleMenuChange = (category, value) => {
+    const categories = [...menuCategories];
+    categories.push(category);
+    setMenuCategories(_.uniq(categories));
+
     const shop = { ...data };
 
-    const menu = _.get(shop, `menu.${path}`);
+    if (!_.get(shop, `menu.${category}`)) {
+      _.set(shop, `menu.${category}`, []);
+      console.log(shop);
+    }
 
+    const menu = _.get(shop, `menu.${category}`);
     menu.push(value);
 
     setData(shop);
     console.log(data);
   };
 
+  const handleChange = (path, value) => {
+    const shop = { ...data };
+    _.set(shop, path, value);
+    setData(shop);
+  };
+
   const doSubmit = (e) => {
     e.preventDefault();
-    addShop(data);
+
+    const shop = { ...data };
+
+    saveShop(shop);
+
+    props.history.push("/shops");
   };
 
   return (
-    <div className="col">
-      <form onSubmit={doSubmit} className="col">
-        <div className="row">
-          <div className="col">
-            <fieldset>
-              <legend>Shop Name </legend>
-              <label htmlFor="name">
+    <React.Fragment>
+      <div className="shopFormPage row d-flex justify-content-md-center">
+        <form onSubmit={doSubmit} className="form-horizontal col ">
+          <fieldset className="control-group">
+            <legend>Shop Name</legend>
+
+            <label htmlFor="name" className="control-label col">
+              <div className="controls">
                 <input
                   type="text"
                   id="name"
@@ -57,16 +75,15 @@ const ShopForm = ({ addShop }) => {
                     handleChange("name", e.target.value);
                   }}
                 />
-              </label>
-            </fieldset>
-          </div>
+              </div>
+            </label>
+          </fieldset>
+          <fieldset className="control-group">
+            <legend>Hours</legend>
 
-          <div className="col">
-            <fieldset>
-              <legend>Hours </legend>
-
-              <label htmlFor="open" className="col">
-                Open
+            <label htmlFor="open" className="control-label col">
+              Open
+              <div className="controls">
                 <input
                   type="time"
                   id="open"
@@ -75,10 +92,12 @@ const ShopForm = ({ addShop }) => {
                     handleChange("hours.open", e.target.value);
                   }}
                 />
-              </label>
+              </div>
+            </label>
 
-              <label htmlFor="close" className="col">
-                Close
+            <label htmlFor="close" className="control-label col">
+              Close{" "}
+              <div className="controls">
                 <input
                   type="time"
                   id="close"
@@ -87,18 +106,47 @@ const ShopForm = ({ addShop }) => {
                     handleChange("hours.close", e.target.value);
                   }}
                 />
-              </label>
-            </fieldset>
-          </div>
+              </div>
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend className="control-group">Description</legend>
+
+            <label htmlFor="description" className="control-label col">
+              <div className="controls">
+                <input
+                  type="text"
+                  id="description"
+                  value={data.description}
+                  onChange={(e) => {
+                    handleChange("description", e.target.value);
+                  }}
+                />
+              </div>
+            </label>
+          </fieldset>
+
+          <label htmlFor="submit" className="control-label">
+            <div className="controls">
+              <input type="submit" id="submit" value="Submit Shop" />
+            </div>
+          </label>
+        </form>
+
+        <div className="col">
+          <MenuForm
+            saveItem={handleMenuChange}
+            menu={data.menu}
+            categories={menuCategories}
+            menuItem={selectedMenuItem}
+          />
         </div>
-      </form>
 
-      <div>
-        <MenuForm addItem={handleMenuChange} menu={data.menu} />
-
-        <MenuDisplay menu={data.menu} />
+        <div className="col">
+          <MenuList menu={data.menu} editItem={editMenuItem} />
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

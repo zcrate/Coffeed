@@ -1,0 +1,6 @@
+05/08 - 
+make menu into a single array for all menu items
+call item category on display/sort, etc
+highlight selected item in menulist
+
+Make ShopPage

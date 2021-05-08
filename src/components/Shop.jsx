@@ -5,7 +5,7 @@ import { Badge } from "react-bootstrap";
 import { getOpenStatus, timeDisplay } from "../fakeBackend/fakeShopsService";
 
 const Shop = ({ id, name, descr, hours }) => {
-  const [openStatus, setOpenStatus] = useState(getOpenStatus(id));
+  const [openStatus] = useState(getOpenStatus(id));
 
   return (
     <li

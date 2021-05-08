@@ -16,7 +16,7 @@ export const allShops = [
         ],
       },
       {
-        foods: [
+        food: [
           { item: "donut", price: 2 },
           { item: "sandwich", price: 7 },
         ],
@@ -42,7 +42,7 @@ export const allShops = [
         ],
       },
       {
-        foods: [
+        food: [
           { item: "bagel", price: 4 },
           { item: "sandwich", price: 13 },
           { item: "wrap", price: 15 },
@@ -95,7 +95,7 @@ export const allShops = [
         ],
       },
       {
-        foods: [
+        food: [
           { item: "bagel", price: 4 },
           { item: "donut", price: 3 },
           { item: "superwrap", price: 8 },
@@ -106,3 +106,21 @@ export const allShops = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
+
+function getShop(id) {
+  return allShops.find((s) => s._id === id);
+}
+
+function getAllShops() {
+  return allShops;
+}
+
+function addShop(shop) {
+  allShops.push(shop);
+}
+
+export default {
+  get: getShop,
+  getAll: getAllShops,
+  post: addShop,
+};

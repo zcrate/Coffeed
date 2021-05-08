@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ShopsList = ({ shops }) => {
   return (
-    <ul className="shopsList col">
+    <ul className="shopsList">
       <Link
         to="/shops/new"
         className="
