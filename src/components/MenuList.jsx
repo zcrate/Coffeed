@@ -1,19 +1,40 @@
-import React, { Fragment, useState } from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
+import MenuListItem from "./MenuListItem";
 
-import MenuItem from "./MenuItem";
+const MenuList = ({
+  menu,
+  categories,
+  selectItem,
+  selectedMenuItem,
+  isForm,
+}) => {
+  let groups = categories.map((category) => {
+    return {
+      name: category,
+      list: menu.filter((item) => item.category === category),
+    };
+  });
 
-const MenuList = ({ menu, editItem }) => {
-  const menuTypes = Object.keys(menu);
-
+  groups = groups.filter((o) => {
+    return o.list.length > 0;
+  });
+  console.log(categories);
   return (
     <ul className="col">
-      {menuTypes.map((menuType, index) => (
-        <li key={index}>
-          <h2>{menuType}</h2>
+      {groups.map((category, index) => (
+        <li key={category.name + index}>
+          <h3>{_.startCase(category.name).trim()}</h3>
+
           <ul>
-            {menu[menuType].map((item, index) => (
-              <MenuItem key={index} item={item} editItem={editItem} />
+            {category.list.map((item, index) => (
+              <MenuListItem
+                key={item.name + index}
+                item={item}
+                selectItem={selectItem}
+                selected={item === selectedMenuItem}
+                isForm={isForm}
+              />
             ))}
           </ul>
         </li>

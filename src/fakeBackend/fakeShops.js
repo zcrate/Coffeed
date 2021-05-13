@@ -7,20 +7,12 @@ export const allShops = [
       close: "17:00",
     },
     menu: [
-      {
-        drinks: [
-          { item: "a hot cup of joe", price: 4 },
-          { item: "a cold one", price: 4 },
-          { item: "juice", price: 3 },
-          { item: "soft drink", price: 3 },
-        ],
-      },
-      {
-        food: [
-          { item: "donut", price: 2 },
-          { item: "sandwich", price: 7 },
-        ],
-      },
+      { name: "a hot cup of joe", price: 4, category: "beverages" },
+      { name: "a cold one", price: 4, category: "beverages" },
+      { name: "juice", price: 3, category: "beverages" },
+      { name: "soft drink", price: 3, category: "beverages" },
+      { name: "donut", price: 2, category: "food" },
+      { name: "sandwich", price: 7, category: "food" },
     ],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -34,20 +26,12 @@ export const allShops = [
       close: "20:00",
     },
     menu: [
-      {
-        drinks: [
-          { item: "coffee", price: 8 },
-          { item: "tea", price: 7 },
-          { item: "fancy water", price: 6 },
-        ],
-      },
-      {
-        food: [
-          { item: "bagel", price: 4 },
-          { item: "sandwich", price: 13 },
-          { item: "wrap", price: 15 },
-        ],
-      },
+      { name: "coffee", price: 8, category: "drinks" },
+      { name: "tea", price: 7, category: "drinks" },
+      { name: "fancy water", price: 6, category: "drinks" },
+      { name: "bagel", price: 4, category: "eats" },
+      { name: "sandwich", price: 13, category: "eats" },
+      { name: "wrap", price: 15, category: "eats" },
     ],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -61,20 +45,12 @@ export const allShops = [
       close: "16:00",
     },
     menu: [
-      {
-        drinks: [
-          { item: "coffee", price: 4 },
-          { item: "tea", price: 4 },
-          { item: "cappuccino", price: 6 },
-        ],
-      },
-      {
-        eats: [
-          { item: "bagel", price: 3 },
-          { item: "donut", price: 2 },
-          { item: "breakfast burrito", price: 9 },
-        ],
-      },
+      { name: "coffee", price: 4, category: "drinks" },
+      { name: "tea", price: 4, category: "drinks" },
+      { name: "cappuccino", price: 6, category: "drinks" },
+      { name: "bagel", price: 3, category: "food" },
+      { name: "donut", price: 2, category: "food" },
+      { name: "breakfast burrito", price: 9, category: "food" },
     ],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -87,20 +63,12 @@ export const allShops = [
       close: "22:00",
     },
     menu: [
-      {
-        drinks: [
-          { item: "the darkest roast", price: 4 },
-          { item: "medium roast", price: 4 },
-          { item: "tea", price: 4 },
-        ],
-      },
-      {
-        food: [
-          { item: "bagel", price: 4 },
-          { item: "donut", price: 3 },
-          { item: "superwrap", price: 8 },
-        ],
-      },
+      { name: "the darkest roast", price: 4, category: "drinks" },
+      { name: "medium roast", price: 4, category: "drinks" },
+      { name: "tea", price: 4, category: "drinks" },
+      { name: "bagel", price: 4, category: "food" },
+      { name: "donut", price: 3, category: "food" },
+      { name: "superwrap", price: 8, category: "food" },
     ],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

@@ -25,6 +25,10 @@ export function getAllShops() {
   return fakeShops.getAll();
 }
 
+export function getShop(id) {
+  return fakeShops.get(id);
+}
+
 export function saveShop(shop) {
   console.log(shop);
 

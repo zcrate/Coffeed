@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
-import MenuForm from "./MenuForm";
-import MenuList from "./MenuList";
+import Menu from "./Menu";
 
-import { saveShop } from "../fakeBackend/fakeShopsService";
+import { getShop, saveShop } from "../fakeBackend/fakeShopsService";
 
 const ShopForm = (props) => {
   const [data, setData] = useState({
@@ -14,33 +14,20 @@ const ShopForm = (props) => {
       close: "",
     },
     description: "",
-    menu: {},
+    menu: [],
   });
-  const [menuCategories, setMenuCategories] = useState(["food", "drinks"]);
-  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
-  const editMenuItem = (item) => {
-    setSelectedMenuItem(item);
-  };
+  useEffect(() => {
+    const fetchData = () => {
+      const shopId = props.match.params.id;
+      if (shopId === "new") return;
 
-  const handleMenuChange = (category, value) => {
-    const categories = [...menuCategories];
-    categories.push(category);
-    setMenuCategories(_.uniq(categories));
+      const shop = getShop(shopId);
+      setData(shop);
+    };
 
-    const shop = { ...data };
-
-    if (!_.get(shop, `menu.${category}`)) {
-      _.set(shop, `menu.${category}`, []);
-      console.log(shop);
-    }
-
-    const menu = _.get(shop, `menu.${category}`);
-    menu.push(value);
-
-    setData(shop);
-    console.log(data);
-  };
+    fetchData();
+  }, []);
 
   const handleChange = (path, value) => {
     const shop = { ...data };
@@ -78,6 +65,7 @@ const ShopForm = (props) => {
               </div>
             </label>
           </fieldset>
+
           <fieldset className="control-group">
             <legend>Hours</legend>
 
@@ -109,8 +97,9 @@ const ShopForm = (props) => {
               </div>
             </label>
           </fieldset>
+
           <fieldset>
-            <legend className="control-group">Description</legend>
+            <legend>Description</legend>
 
             <label htmlFor="description" className="control-label col">
               <div className="controls">
@@ -126,28 +115,34 @@ const ShopForm = (props) => {
             </label>
           </fieldset>
 
-          <label htmlFor="submit" className="control-label">
-            <div className="controls">
-              <input type="submit" id="submit" value="Submit Shop" />
-            </div>
-          </label>
+          <fieldset className="control-group">
+            <label htmlFor="submit" className="control-label">
+              <div className="controls">
+                <input type="submit" id="submit" value="Submit Shop" />
+              </div>
+            </label>
+          </fieldset>
         </form>
 
-        <div className="col">
-          <MenuForm
-            saveItem={handleMenuChange}
-            menu={data.menu}
-            categories={menuCategories}
-            menuItem={selectedMenuItem}
-          />
-        </div>
-
-        <div className="col">
-          <MenuList menu={data.menu} editItem={editMenuItem} />
-        </div>
+        <Menu
+          shopId={props.match.params.id}
+          menu={data.menu}
+          saveMenu={handleChange}
+        />
       </div>
     </React.Fragment>
   );
+};
+
+ShopForm.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
 };
 
 export default ShopForm;

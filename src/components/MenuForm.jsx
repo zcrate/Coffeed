@@ -1,34 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
-const MenuForm = ({ saveItem, categories, menuItem }) => {
+import { getShop } from "./../fakeBackend/fakeShopsService";
+
+const MenuForm = ({ shopId, submitItem, categories, selectedMenuItem }) => {
   const [data, setData] = useState({
     name: "",
     price: "",
-    category: "food",
+    category: categories[0],
   });
   const [isCustom, setIsCustom] = useState(false);
 
-  // const [category, setCategory] = useState("food");
+  useEffect(() => {
+    const fetchData = () => {
+      if (!selectedMenuItem) return;
 
-  // const handleCategoryChange = ({ currentTarget: input }) => {
-  //   let value = { ...category };
-  //   value = input.value;
-  //   setCategory(value);
-
-  // };
-
-  const populateForm = () => {
-    setData(menuItem);
-  };
-
-  if (menuItem) {
-    populateForm();
-  }
-
-  //populate the form
-  //change button text to "update"
-  //update item (instead of add)
+      setData(selectedMenuItem);
+    };
+    fetchData();
+  }, []);
 
   const handleChange = (path, value) => {
     const item = { ...data };
@@ -41,11 +31,9 @@ const MenuForm = ({ saveItem, categories, menuItem }) => {
   const doSubmit = (e) => {
     e.preventDefault();
 
-    const selected = menuItem;
-
-    const path = _.lowerCase(data.category);
-
-    saveItem(path, data);
+    data.category = _.lowerCase(data.category);
+    console.log(data);
+    submitItem(data);
   };
 
   return (
@@ -128,7 +116,7 @@ const MenuForm = ({ saveItem, categories, menuItem }) => {
               <input
                 type="submit"
                 id="submitMenuItem"
-                value={!menuItem ? "Add Menu Item" : "Update Menu Item"}
+                value={!selectedMenuItem ? "Add Menu Item" : "Update Menu Item"}
               />
             </div>
           </label>
