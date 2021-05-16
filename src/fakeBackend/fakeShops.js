@@ -3,7 +3,7 @@ export const allShops = [
     _id: "0123",
     name: "The Joe",
     hours: {
-      open: "05:00",
+      open: "00:00",
       close: "17:00",
     },
     menu: [
@@ -22,7 +22,7 @@ export const allShops = [
     _id: "2345",
     name: "Dave's Place",
     hours: {
-      open: "05:00",
+      open: "00:00",
       close: "20:00",
     },
     menu: [
@@ -41,8 +41,8 @@ export const allShops = [
     _id: "4567",
     name: "Rise and Shine Cafe",
     hours: {
-      open: "07:00",
-      close: "16:00",
+      open: "05:00",
+      close: "11:00",
     },
     menu: [
       { name: "coffee", price: 4, category: "drinks" },

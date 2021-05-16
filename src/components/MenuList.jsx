@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import _ from "lodash";
 import MenuListItem from "./MenuListItem";
 
@@ -19,7 +19,7 @@ const MenuList = ({
   groups = groups.filter((o) => {
     return o.list.length > 0;
   });
-  console.log(categories);
+
   return (
     <ul className="col">
       {groups.map((category, index) => (

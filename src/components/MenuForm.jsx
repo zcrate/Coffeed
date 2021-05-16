@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
-import { getShop } from "./../fakeBackend/fakeShopsService";
-
 const MenuForm = ({ shopId, submitItem, categories, selectedMenuItem }) => {
   const [data, setData] = useState({
     name: "",
@@ -32,7 +30,6 @@ const MenuForm = ({ shopId, submitItem, categories, selectedMenuItem }) => {
     e.preventDefault();
 
     data.category = _.lowerCase(data.category);
-    console.log(data);
     submitItem(data);
   };
 

@@ -4,7 +4,7 @@ import _ from "lodash";
 import MenuForm from "./MenuForm";
 import MenuList from "./MenuList";
 
-import { getShop } from "./../fakeBackend/fakeShopsService";
+import { getShop } from "./../services/shopService";
 
 const Menu = ({ shopId, saveMenu }) => {
   const [data, setData] = useState(
@@ -15,7 +15,7 @@ const Menu = ({ shopId, saveMenu }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = (shopId) => {
       if (shopId === "new") return;
 
       const shop = { ...getShop(shopId) };
@@ -23,7 +23,7 @@ const Menu = ({ shopId, saveMenu }) => {
       const categories = _.uniq(shop.menu.map((item) => item.category));
       setMenuCategories(categories);
     };
-    fetchData();
+    fetchData(shopId);
   }, []);
 
   const handleSubmit = (value) => {

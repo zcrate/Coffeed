@@ -1,15 +1,23 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import _ from "lodash";
 import ListGroup from "./common/ListGroup";
 
-import {
-  getAllShops,
-  getOpenStatus,
-  timeDisplay,
-} from "../fakeBackend/fakeShopsService";
+import { getShops } from "../services/shopService";
+
+import { getOpenStatus, timeDisplay } from "../shopUtils";
 
 const Shops = () => {
-  const [shops] = useState(getAllShops());
+  const [shops, setShops] = useState([]);
   const [sort, setSort] = useState({ path: "name", order: 1 });
+
+  useEffect(() => {
+    const fetchData = () => {
+      const allShops = { ...getShops() };
+
+      setShops(allShops);
+    };
+    fetchData();
+  }, []);
 
   const sortOptions = [
     { path: "name", label: "Name" },
@@ -23,14 +31,35 @@ const Shops = () => {
   };
 
   const handleSort = (sortBy) => {
-    setSort(sortBy);
+    setSort({ ...sortBy });
   };
-  console.log(sort);
+
+  let filtered = shops;
+
+  let sorted = shops;
+
+  if (sort.path === "openStatus") {
+    sorted = shops.sort((a, b) => {
+      let result =
+        getOpenStatus(a._id) !== getOpenStatus(b._id) && getOpenStatus(a._id)
+          ? 1
+          : -1;
+      if (sort.order === -1) result *= -1;
+      return result;
+    });
+  } else {
+    sorted = _.orderBy(
+      filtered,
+      [sort.path],
+      [sort.order === 1 ? "asc" : "desc"]
+    );
+  }
+
   return (
     <Fragment>
       <div className="Shops_ListGroup">
         <ListGroup
-          data={shops}
+          data={sorted}
           getStatus={getOpenStatus}
           timeDisplay={timeDisplay}
           listItemAdd={listItemAdd}

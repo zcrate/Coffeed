@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 const MenuListItem = ({ item, selectItem, selected, isForm }) => {
-  console.log(item);
   if (!isForm)
     return (
       <li className="shopsListItem">
