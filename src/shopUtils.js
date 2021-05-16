@@ -1,4 +1,5 @@
-import { getShop } from "./services/shopService";
+// import { getShop } from "./services/shopService";
+import { getShop } from "../src/fakeBackend/fakeShopsService";
 
 export function getOpenStatus(id) {
   const shop = getShop(id);

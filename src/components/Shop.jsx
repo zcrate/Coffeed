@@ -3,7 +3,8 @@ import _ from "lodash";
 
 import MenuList from "./MenuList";
 
-import { getShop } from "./../services/shopService";
+// import { getShop } from "./../services/shopService";
+import { getShop } from "./../fakeBackend/fakeShopsService";
 
 const Shop = (props) => {
   const shopId = props.match.params.id;

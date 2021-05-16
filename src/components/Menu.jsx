@@ -4,7 +4,8 @@ import _ from "lodash";
 import MenuForm from "./MenuForm";
 import MenuList from "./MenuList";
 
-import { getShop } from "./../services/shopService";
+// import { getShop } from "./../services/shopService";
+import { getShop } from "./../fakeBackend/fakeShopsService";
 
 const Menu = ({ shopId, saveMenu }) => {
   const [data, setData] = useState(

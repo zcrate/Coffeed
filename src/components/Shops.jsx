@@ -2,7 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import _ from "lodash";
 import ListGroup from "./common/ListGroup";
 
-import { getShops } from "../services/shopService";
+// import { getShops } from "../services/shopService";
+import { getShops } from "../fakeBackend/fakeShopsService";
 
 import { getOpenStatus, timeDisplay } from "../shopUtils";
 
@@ -12,8 +13,7 @@ const Shops = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      const allShops = { ...getShops() };
-
+      const allShops = [...getShops()];
       setShops(allShops);
     };
     fetchData();

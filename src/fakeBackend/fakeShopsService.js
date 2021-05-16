@@ -1,6 +1,6 @@
 import fakeShops from "./fakeShops";
 
-export function getAllShops() {
+export function getShops() {
   return fakeShops.getAll();
 }
 
