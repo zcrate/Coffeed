@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
 import MenuList from "./MenuList";
 
-// import { getShop } from "./../services/shopService";
-import { getShop } from "./../fakeBackend/fakeShopsService";
+import { getShop } from "./../services/shopService";
+// import { getShop } from "./../fakeBackend/fakeShopsService";
 
 const Shop = (props) => {
+  const [shop, setShop] = useState(null);
+
   const shopId = props.match.params.id;
-  const shop = getShop(shopId);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await getShop(shopId);
+      setShop(data);
+    };
+    fetchData();
+  }, []);
+
+  if (shop === null) return null;
 
   const categories = _.uniq(shop.menu.map((item) => item.category));
 

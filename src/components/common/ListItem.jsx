@@ -6,7 +6,7 @@ const ListItem = ({ item, getStatus, timeDisplay }) => {
 
   useEffect(() => {
     const fetchStatus = () => {
-      setStatus(getStatus(item._id));
+      setStatus(getStatus(item));
     };
 
     fetchStatus();

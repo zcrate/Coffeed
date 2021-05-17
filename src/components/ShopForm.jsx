@@ -4,7 +4,8 @@ import _ from "lodash";
 
 import Menu from "./Menu";
 
-import { getShop, saveShop } from "../fakeBackend/fakeShopsService";
+import { getShop, saveShop } from "../services/shopService";
+// import { getShop, saveShop } from "../fakeBackend/fakeShopsService";
 
 const ShopForm = (props) => {
   const [data, setData] = useState({
@@ -17,15 +18,15 @@ const ShopForm = (props) => {
     menu: [],
   });
 
+  const shopId = props.match.params.id;
+
   useEffect(() => {
-    const fetchData = () => {
-      const shopId = props.match.params.id;
+    const fetchData = async () => {
       if (shopId === "new") return;
 
-      const shop = getShop(shopId);
-      setData(shop);
+      const { data } = await getShop(shopId);
+      setData(data);
     };
-
     fetchData();
   }, []);
 
@@ -35,12 +36,11 @@ const ShopForm = (props) => {
     setData(shop);
   };
 
-  const doSubmit = (e) => {
+  const doSubmit = async (e) => {
     e.preventDefault();
 
     const shop = { ...data };
-
-    saveShop(shop);
+    await saveShop(shop);
 
     props.history.push("/shops");
   };

@@ -2,8 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import _ from "lodash";
 import ListGroup from "./common/ListGroup";
 
-// import { getShops } from "../services/shopService";
-import { getShops } from "../fakeBackend/fakeShopsService";
+import { getShops } from "../services/shopService";
+// import { getShops } from "../fakeBackend/fakeShopsService";
 
 import { getOpenStatus, timeDisplay } from "../shopUtils";
 
@@ -12,9 +12,9 @@ const Shops = () => {
   const [sort, setSort] = useState({ path: "name", order: 1 });
 
   useEffect(() => {
-    const fetchData = () => {
-      const allShops = [...getShops()];
-      setShops(allShops);
+    const fetchData = async () => {
+      const allShops = await getShops();
+      setShops(allShops.data);
     };
     fetchData();
   }, []);
@@ -41,9 +41,7 @@ const Shops = () => {
   if (sort.path === "openStatus") {
     sorted = shops.sort((a, b) => {
       let result =
-        getOpenStatus(a._id) !== getOpenStatus(b._id) && getOpenStatus(a._id)
-          ? 1
-          : -1;
+        getOpenStatus(a) !== getOpenStatus(b) && getOpenStatus(a) ? 1 : -1;
       if (sort.order === -1) result *= -1;
       return result;
     });

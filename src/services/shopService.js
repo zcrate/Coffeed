@@ -21,9 +21,16 @@ export function deleteShop(id) {
 export function saveShop(shop) {
   if (shop._id) {
     const body = { ...shop };
-    delete shop._id;
+    delete body._id;
+    delete body.hours._id;
+    body.menu.forEach((item) => {
+      delete item._id;
+    });
+    console.log(JSON.stringify(body));
+    console.log(shopUrl(shop._id));
     return http.put(shopUrl(shop._id), body);
   }
 
+  console.log(JSON.stringify(shop));
   return http.post(apiEndpoint, shop);
 }

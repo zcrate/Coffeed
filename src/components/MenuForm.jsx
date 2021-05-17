@@ -29,8 +29,12 @@ const MenuForm = ({ shopId, submitItem, categories, selectedMenuItem }) => {
   const doSubmit = (e) => {
     e.preventDefault();
 
-    data.category = _.lowerCase(data.category);
-    submitItem(data);
+    const menuItem = { ...data };
+    menuItem.price = parseInt(data.price);
+
+    menuItem.category = _.lowerCase(data.category);
+    console.log(menuItem);
+    submitItem(menuItem);
   };
 
   return (

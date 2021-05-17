@@ -1,8 +1,8 @@
-// import { getShop } from "./services/shopService";
-import { getShop } from "../src/fakeBackend/fakeShopsService";
+import { getShop } from "./services/shopService";
+// import { getShop } from "../src/fakeBackend/fakeShopsService";
 
-export function getOpenStatus(id) {
-  const shop = getShop(id);
+export function getOpenStatus(shop) {
+  console.log(shop);
   const { open, close } = shop.hours;
   const { startDate, endDate } = isOpen(open, close);
 
