@@ -26,11 +26,9 @@ export function saveShop(shop) {
     body.menu.forEach((item) => {
       delete item._id;
     });
-    console.log(JSON.stringify(body));
-    console.log(shopUrl(shop._id));
+
     return http.put(shopUrl(shop._id), body);
   }
 
-  console.log(JSON.stringify(shop));
   return http.post(apiEndpoint, shop);
 }

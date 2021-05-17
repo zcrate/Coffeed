@@ -33,7 +33,7 @@ const MenuForm = ({ shopId, submitItem, categories, selectedMenuItem }) => {
     menuItem.price = parseInt(data.price);
 
     menuItem.category = _.lowerCase(data.category);
-    console.log(menuItem);
+
     submitItem(menuItem);
   };
 

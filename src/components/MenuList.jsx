@@ -17,7 +17,6 @@ const MenuList = ({
   });
 
   groups = groups.filter((o) => {
-    console.log(o.name, o.list.length);
     return o.list.length > 0;
   });
 

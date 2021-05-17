@@ -1,47 +1,21 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import _ from "lodash";
 
 import MenuForm from "./MenuForm";
 import MenuList from "./MenuList";
 
-import { getShop } from "./../services/shopService";
-// import { getShop } from "./../fakeBackend/fakeShopsService";
-
 const Menu = ({ shopId, menu: data, saveMenu }) => {
-  // const [data, setData] = useState(
-  //   []
-  //   // shopId === "new" ? [] : [getShop(shopId).menu]
-  // );
-
-  // const [menuCategories, setMenuCategories] = useState(["food", "drinks"]);
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
-
-  // useEffect(() => {
-  // const fetchData = async () => {
-
-  // const result = await getShop(shopId);
-  // const shop = result.data;
-  // if (shopId === "new") return null;
 
   const categories =
     shopId === "new"
       ? ["food", "drink"]
       : _.uniq(data.map((item) => item.category));
-  // setMenuCategories(categories);
 
-  //   console.log(categories);
-  // };
-  // fetchData();
-  // }, []);
-  console.log(data);
   const handleSubmit = (value) => {
     const menu = [...data];
 
     const category = _.lowerCase(value.category);
-
-    // const categories = [...menuCategories, category];
-
-    // setMenuCategories(_.uniq(categories));
 
     if (selectedMenuItem) {
       const index = menu.findIndex((menuItem) => selectedMenuItem === menuItem);
@@ -50,8 +24,6 @@ const Menu = ({ shopId, menu: data, saveMenu }) => {
     } else {
       menu.push({ ...value });
     }
-
-    // setData(menu);
 
     saveMenu("menu", menu);
   };

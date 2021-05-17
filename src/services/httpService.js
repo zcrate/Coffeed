@@ -1,9 +1,5 @@
 import axios from "axios";
 
-// const axiosCreate = axios.create({
-//   baseURL: process.env.REACT_APP_API_URL,
-// });
-
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.response.use(null, (error) => {

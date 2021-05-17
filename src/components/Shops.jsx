@@ -3,7 +3,6 @@ import _ from "lodash";
 import ListGroup from "./common/ListGroup";
 
 import { getShops } from "../services/shopService";
-// import { getShops } from "../fakeBackend/fakeShopsService";
 
 import { getOpenStatus, timeDisplay } from "../shopUtils";
 
